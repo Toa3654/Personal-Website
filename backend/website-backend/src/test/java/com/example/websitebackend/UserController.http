@@ -1,0 +1,56 @@
+
+### Add User
+POST http://localhost:8080/personalwebsite/users/add
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@gmail.com",
+  "password": "Password123"
+}
+
+### Update User By ID
+PUT http://localhost:8080/personalwebsite/users/update/{{userId}}
+Content-Type: application/json
+
+{
+  "name": "John Smith",
+  "email": "johnsmith@gmail.com",
+  "password": "NewPassword123"
+}
+
+### Get User By ID
+GET http://localhost:8080/personalwebsite/users/6acd820564878036e2138a16
+
+### Delete User By ID
+DELETE http://localhost:8080/personalwebsite/users/6acd820564878036e2138a16
+
+### Test Empty Name Exception
+POST http://localhost:8080/personalwebsite/users/add
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": "test@gmail.com",
+  "password": "Password123"
+}
+
+### Test Empty Email Exception
+POST http://localhost:8080/personalwebsite/users/add
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "",
+  "password": "Password123"
+}
+
+### Test Empty Password Exception
+POST http://localhost:8080/personalwebsite/users/add
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@gmail.com",
+  "password": ""
+}

@@ -12,7 +12,6 @@
 
 <body>
 
-    <?php include 'navbar.php'; ?>
 
     <main class="certificates-page">
 

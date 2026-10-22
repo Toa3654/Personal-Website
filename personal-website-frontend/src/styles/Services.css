@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef1f2;
+    color: #222;
+}
+
+
+/* PAGE */
+
+main {
+    width: 95%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+
+/* MAIN SERVICE SECTIONS */
+
+main > section {
+    margin-bottom: 90px;
+}
+
+
+/* SECTION HEADER */
+
+main > section > header {
+    margin-bottom: 40px;
+}
+
+main > section > header h1 {
+    font-size: 48px;
+    text-align: center;
+}
+
+
+/* SERVICE CARDS */
+
+.Real-estate,
+.hunting,
+.Drone-Learning,
+main > section:last-of-type > div {
+    background-color: white;
+
+    padding: 35px;
+
+    margin-bottom: 35px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* SERVICE TITLES */
+
+.Real-estate h2,
+.hunting h2,
+.Drone-Learning h2,
+main > section:last-of-type h2 {
+    font-size: 32px;
+
+    margin-bottom: 18px;
+}
+
+
+/* ORANGE ACCENT LINE */
+
+.Real-estate h2::after,
+.hunting h2::after,
+.Drone-Learning h2::after,
+main > section:last-of-type h2::after {
+    content: "";
+
+    display: block;
+
+    width: 70px;
+    height: 4px;
+
+    margin-top: 10px;
+
+    background-color: #ef5b3d;
+}
+
+
+/* PARAGRAPHS */
+
+.Real-estate p,
+.hunting p,
+.Drone-Learning p,
+main > section:last-of-type p {
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #444;
+
+    margin-bottom: 18px;
+}
+
+
+/* LINKS */
+
+.Real-estate a,
+.hunting a,
+.Drone-Learning a {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    padding: 10px 18px;
+
+    background-color: #ef5b3d;
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+.Real-estate a:hover,
+.hunting a:hover,
+.Drone-Learning a:hover {
+    background-color: #d94c31;
+
+    transform: translateY(-2px);
+}
+
+
+/* DRONE SERVICES GRID */
+
+main > section:first-of-type {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* HEADER SPANS FULL WIDTH */
+
+main > section:first-of-type > header {
+    grid-column: 1 / -1;
+}
+
+
+/* REMOVE EXTRA CARD MARGINS INSIDE GRID */
+
+main > section:first-of-type .Real-estate,
+main > section:first-of-type .hunting,
+main > section:first-of-type .Drone-Learning {
+    margin-bottom: 0;
+}
+
+
+/* PROGRAMMING SERVICES */
+
+main > section:last-of-type {
+    width: 100%;
+}
+
+main > section:last-of-type > div {
+    max-width: 950px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* RESPONSIVE TABLET */
+
+@media (max-width: 950px) {
+
+    main > section:first-of-type {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .Drone-Learning {
+        grid-column: 1 / -1;
+    }
+
+    main > section > header h1 {
+        font-size: 40px;
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    main {
+        width: 92%;
+        padding: 35px 0;
+    }
+
+    main > section {
+        margin-bottom: 60px;
+    }
+
+    main > section:first-of-type {
+        grid-template-columns: 1fr;
+    }
+
+    .Drone-Learning {
+        grid-column: auto;
+    }
+
+    main > section > header h1 {
+        font-size: 34px;
+    }
+
+    .Real-estate,
+    .hunting,
+    .Drone-Learning,
+    main > section:last-of-type > div {
+        padding: 25px;
+    }
+
+    .Real-estate h2,
+    .hunting h2,
+    .Drone-Learning h2,
+    main > section:last-of-type h2 {
+        font-size: 27px;
+    }
+
+    .Real-estate p,
+    .hunting p,
+    .Drone-Learning p,
+    main > section:last-of-type p {
+        font-size: 16px;
+    }
+}

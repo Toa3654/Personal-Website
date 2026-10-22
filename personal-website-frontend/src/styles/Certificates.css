@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef1f2;
+    color: #222;
+}
+
+
+/* PAGE */
+
+.certificates-page {
+    width: 95%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+    padding: 50px 0;
+}
+
+
+/* PAGE TITLE */
+
+.certificates-title {
+    text-align: center;
+
+    font-size: 48px;
+
+    margin-bottom: 70px;
+}
+
+
+/* CERTIFICATE SECTIONS */
+
+.certificate-section {
+    width: 100%;
+
+    margin-bottom: 90px;
+
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+
+/*
+    Every other section swaps sides.
+
+    Section 1:
+    Image left / text right
+
+    Section 2:
+    Text left / image right
+
+    Section 3:
+    Image left / text right
+*/
+
+.certificate-section:nth-of-type(even) {
+    grid-template-columns: 1fr 1.4fr;
+}
+
+
+/* IMAGE */
+
+.certificate-section img {
+    width: 100%;
+    max-width: 650px;
+
+    display: block;
+
+    background-color: white;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* MOVE EVEN IMAGES TO RIGHT */
+
+.certificate-section:nth-of-type(even) img {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+
+/* MOVE EVEN TEXT TO LEFT */
+
+.certificate-section:nth-of-type(even) .certificate-text {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+
+/* TEXT */
+
+.certificate-text {
+    width: 100%;
+}
+
+.certificate-text h2 {
+    font-size: 32px;
+
+    margin-bottom: 18px;
+}
+
+.certificate-text p {
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #444;
+}
+
+
+/* SMALL HIGHLIGHT LINE */
+
+.certificate-text h2::after {
+    content: "";
+
+    display: block;
+
+    width: 70px;
+    height: 4px;
+
+    margin-top: 10px;
+
+    background-color: #ef5b3d;
+}
+
+
+/* PHONE / TABLET */
+
+@media (max-width: 800px) {
+
+    .certificates-title {
+        font-size: 38px;
+        margin-bottom: 40px;
+    }
+
+    .certificate-section,
+    .certificate-section:nth-of-type(even) {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+
+        margin-bottom: 60px;
+    }
+
+    .certificate-section img,
+    .certificate-section:nth-of-type(even) img {
+        grid-column: 1;
+        grid-row: auto;
+
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .certificate-section:nth-of-type(even) .certificate-text {
+        grid-column: 1;
+        grid-row: auto;
+    }
+
+    .certificate-text h2 {
+        font-size: 27px;
+    }
+
+    .certificate-text p {
+        font-size: 16px;
+    }
+}

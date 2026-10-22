@@ -26,6 +26,7 @@ function Navbar() {
                         <Link to="/hunting">Hunting Recovery</Link>
                         <Link to="/drone-learning">Drone Learning</Link>
                         <Link to="/website-building">Website Building</Link>
+                        <Link to="/user-page">Sign up/Login</Link>
                     </div>
                 </div>            
             </div>

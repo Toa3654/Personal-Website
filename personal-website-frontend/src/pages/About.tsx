@@ -1,5 +1,7 @@
 import "../styles/About.css";
 import badlandsSign from "../assets/badlandssign.jpg";
+import adventure from "../assets/adventure.jpg";
+
 
 function About() {
     return (
@@ -10,8 +12,9 @@ function About() {
                     <h1>About Me</h1>
 
                     <p>
-                        I enjoy doing many different things, but the two things I am most passionate about
-                        are programming and drones, and I hope to build a career around them.
+                        I enjoy many different hobbies from video games in my free time to adventuring the tetons.
+                        I also like to lift to keep my body healthy, and I love to eat to keep me unhealthy.
+                        But the two things I am most passionate about are programming and drones, and I hope to build a career around them.
                         What I enjoy most about programming is not just writing code, but the problem-solving
                         that comes with it. Drone work adds a real-world aspect to that problem-solving because
                         every environment is different, requiring preparation, adaptability, and attention to
@@ -28,18 +31,10 @@ function About() {
                 <section className="hobbies">
 
                     <div className="hobby-card">
-                        <img src={badlandsSign} alt="The Badlands" />
+                        <img src={adventure} alt="Delta Lake" />
 
                         <div className="overlay">
                             <h2>Adventuring</h2>
-                        </div>
-                    </div>
-
-                    <div className="hobby-card">
-                        <img src={badlandsSign} alt="Video Games" />
-
-                        <div className="overlay">
-                            <h2>Video Games</h2>
                         </div>
                     </div>
 
@@ -59,7 +54,7 @@ function About() {
                         </div>
                     </div>
 
-                    <div className="hobby-card wide">
+                    <div className="hobby-card">
                         <img src={badlandsSign} alt="Food" />
 
                         <div className="overlay">

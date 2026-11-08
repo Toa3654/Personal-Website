@@ -15,6 +15,20 @@ public class UserService implements IUserServices {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    
+    public User authenticate(String email, String password) {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return null;
+        }
+
+        if (!user.getPassword().equals(password)) {
+            return null;
+        }
+
+        return user;
+    }
 
     @Override
     public User addUser(User user) {
@@ -31,9 +45,11 @@ public class UserService implements IUserServices {
 
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        existingUser.setName(user.getName());
+        existingUser.setFirstname(user.getFirstname());
+        existingUser.setLastname(user.getLastname());
         existingUser.setEmail(user.getEmail());
         existingUser.setPassword(user.getPassword());
+        existingUser.setPhone(user.getPhone());
 
         return userRepository.save(existingUser);
     }
@@ -66,7 +82,13 @@ public class UserService implements IUserServices {
         if(user.email.isEmpty()) {
             throw new EmailEmptyException();
         }
-        if(user.name.isEmpty()){
+        if(user.firstname.isEmpty()){
+            throw new NameEmptyException();
+        }
+        if(user.lastname.isEmpty()){
+            throw new NameEmptyException();
+        }
+        if(user.phone.isEmpty()){
             throw new NameEmptyException();
         }
         if(user.password.isEmpty()){

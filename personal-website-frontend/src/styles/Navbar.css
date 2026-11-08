@@ -115,3 +115,28 @@
     background-color: #e8e3db;
     color: #ef5b3d;
 }
+
+.navbar-user {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #222;
+}
+
+.logout-button {
+    border: none;
+    background: none;
+    color: #222;
+
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.logout-button:hover {
+    color: #ef5b3d;
+}

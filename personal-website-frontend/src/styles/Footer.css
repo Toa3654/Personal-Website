@@ -26,6 +26,81 @@
     font-size: 16px;
 }
 
+
+/* CONTACT FORM */
+
+.footer-form {
+    width: 320px;
+}
+
+.footer-form h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.footer-form input,
+.footer-form textarea {
+    width: 100%;
+
+    padding: 7px 8px;
+
+    font-size: 13px;
+
+    border: 1px solid #555;
+    border-radius: 4px;
+
+    background-color: #2b2b2b;
+    color: white;
+}
+
+.footer-form input::placeholder,
+.footer-form textarea::placeholder {
+    color: #aaa;
+}
+
+.footer-form textarea {
+    height: 34px;
+
+    resize: none;
+}
+
+.footer-form button {
+    grid-column: 1 / -1;
+
+    padding: 7px;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #ef5b3d;
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.footer-form button:hover {
+    background-color: #d94c31;
+}
+
+.footer-message {
+    margin-top: 6px;
+
+    font-size: 12px;
+    text-align: center;
+}
+
+
+/* CONTACT LINKS */
+
 .footer-contact {
     display: flex;
     flex-direction: column;
@@ -49,6 +124,9 @@
     color: #ef5b3d;
 }
 
+
+/* FOOTER BOTTOM */
+
 .footer-bottom {
     max-width: 1200px;
 
@@ -65,7 +143,9 @@
     font-size: 14px;
 }
 
+
 @media (max-width: 700px) {
+
     .footer {
         padding: 35px 25px 20px;
     }
@@ -76,5 +156,17 @@
 
     .footer-name h2 {
         font-size: 24px;
+    }
+
+    .footer-form {
+        width: 100%;
+    }
+
+    .footer-form form {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-form button {
+        grid-column: 1;
     }
 }

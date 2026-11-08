@@ -5,106 +5,128 @@
 }
 
 body {
-    font-family: Georgia, "Times New Roman", serif;
-    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #eef1f2;
     color: #222;
 }
 
-
-/* ========================================
-   ABOUT ME HEADER
-   ======================================== */
-
-header.header {
+.header {
     width: 90%;
     max-width: 1200px;
+
     margin: 0 auto;
-    padding: 60px 0;
+    padding: 70px 0;
 
     display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 60px;
+    grid-template-columns: 1fr 420px;
+
+    gap: 70px;
 
     align-items: center;
 }
 
-
-/* LEFT SIDE TEXT */
-
-.header .header-text {
-    width: 100%;
-    max-width: 550px;
+.header-text {
+    max-width: 600px;
 }
 
-.header .header-text h1 {
-    font-size: 52px;
-    margin-bottom: 25px;
+.header-text h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 58px;
+
+    margin-bottom: 30px;
 }
 
-.header .header-text p {
+.header-text p {
     font-size: 20px;
     line-height: 1.8;
-    color: #666;
+    color: #555;
 }
 
-
-/* RIGHT SIDE IMAGE */
-
-.header .header-image {
-    width: 360px;
-    height: 500px;
-
-    justify-self: end;
+.header-image {
+    width: 420px;
+    height: 560px;
 
     overflow: hidden;
+
+    justify-self: end;
 }
 
-.header .header-image img {
-    display: block;
+.header-image img {
+    width: 100%;
+    height: 100%;
 
-    width: 360px !important;
-    max-width: 360px !important;
-    height: 500px !important;
+    display: block;
 
     object-fit: cover;
 }
 
 
-/* ========================================
-   MAIN CONTENT
-   ======================================== */
-
 main {
     width: 90%;
-    max-width: 1200px;
+    max-width: 1400px;
+
     margin: 0 auto;
+    padding-bottom: 70px;
 }
-
-
-/* ========================================
-   HOBBY SECTION
-   ======================================== */
 
 .hobbies {
+    width: 100%;
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 40px;
 }
-
-
-/* ========================================
-   HOBBY CARDS
-   ======================================== */
 
 .hobby-card {
     position: relative;
-    height: 350px;
+
+    width: 600px;
+    height: 400px;
+
+    grid-column: auto;
+
     overflow: hidden;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hobbies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.hobby-card:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.hobby-card:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.hobby-card:nth-of-type(3) {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.hobby-card:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 2;
 }
 
 .hobby-card img {
     width: 100%;
     height: 100%;
+
+    display: block;
 
     object-fit: cover;
 
@@ -112,145 +134,126 @@ main {
 }
 
 .hobby-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
-
-
-/* ========================================
-   TEXT OVER HOBBY IMAGES
-   ======================================== */
 
 .overlay {
     position: absolute;
 
-    bottom: 0;
     left: 0;
+    bottom: 0;
 
     width: 100%;
-    padding: 25px;
+
+    padding: 80px 30px 30px;
 
     background: linear-gradient(
         transparent,
-        rgba(0, 0, 0, 0.8)
+        rgba(0, 0, 0, 0.85)
     );
 }
 
 .overlay h2 {
     color: white;
-    font-size: 30px;
+
+    font-size: 32px;
+
+    font-weight: 700;
 }
 
+.overlay h2::after {
+    content: "";
 
-/* ========================================
-   WIDE BOTTOM CARD
-   ======================================== */
+    display: block;
 
-.wide {
-    grid-column: span 2;
-    height: 400px;
+    width: 75px;
+    height: 4px;
+
+    margin-top: 12px;
+
+    background-color: #ef5b3d;
 }
 
+@media (max-width: 1000px) {
 
-/* ========================================
-   FOOTER
-   ======================================== */
+    .header {
+        grid-template-columns: 1fr 340px;
 
-footer {
-    margin-top: 60px;
-    padding: 30px;
-
-    text-align: center;
-
-    background-color: #222;
-    color: white;
-}
-
-
-/* ========================================
-   TABLET
-   ======================================== */
-
-@media (max-width: 900px) {
-
-    header.header {
-        grid-template-columns: 1fr 300px;
-        gap: 35px;
+        gap: 45px;
     }
 
-    .header .header-image {
-        width: 300px;
-        height: 420px;
+    .header-image {
+        width: 340px;
+        height: 460px;
     }
 
-    .header .header-image img {
-        width: 300px !important;
-        max-width: 300px !important;
-        height: 420px !important;
+    .header-text h1 {
+        font-size: 48px;
     }
 
-    .header .header-text h1 {
-        font-size: 44px;
-    }
-
-    .header .header-text p {
+    .header-text p {
         font-size: 18px;
     }
+
+    .hobbies {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 25px;
+    }
+
+    .hobby-card {
+        height: 380px;
+    }
 }
 
 
-/* ========================================
+/* =========================
    MOBILE
-   ======================================== */
+   ========================= */
 
 @media (max-width: 700px) {
 
-    header.header {
-        display: grid;
+    .header {
         grid-template-columns: 1fr;
 
-        gap: 30px;
+        gap: 35px;
 
-        padding: 40px 0;
+        padding: 45px 0;
     }
 
-    .header .header-text {
+    .header-text {
         max-width: 100%;
     }
 
-    .header .header-text h1 {
-        font-size: 40px;
+    .header-text h1 {
+        font-size: 42px;
+
+        margin-bottom: 20px;
     }
 
-    .header .header-text p {
-        font-size: 18px;
+    .header-text p {
+        font-size: 17px;
+        line-height: 1.7;
     }
 
-    .header .header-image {
+    .header-image {
         width: 100%;
-        height: auto;
+        height: 420px;
 
         justify-self: center;
-
-        display: flex;
-        justify-content: center;
-    }
-
-    .header .header-image img {
-        width: 300px !important;
-        max-width: 300px !important;
-        height: 420px !important;
     }
 
     .hobbies {
         grid-template-columns: 1fr;
+
+        gap: 25px;
     }
 
-    .wide {
-        grid-column: span 1;
+    .hobby-card {
+        height: 360px;
     }
 
-    .hobby-card,
-    .wide {
-        height: 300px;
+    .overlay h2 {
+        font-size: 26px;
     }
 }

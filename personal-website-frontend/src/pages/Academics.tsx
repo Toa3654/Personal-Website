@@ -1,75 +1,55 @@
 import "../styles/Academics.css";
-import badlandsSign from "../assets/badlandssign.jpg";
+
+import diplomaOne from "../assets/IndianHillsDegree.png";
+import diplomaTwo from "../assets/BellevueDegree.png";
 
 function Academics() {
     return (
         <>
+            <main className="academics-page">
 
-            <header className="header">
-                <div className="header-text">
-                    <h1>About Me</h1>
+                <h1 className="academics-title">Academics</h1>
 
-                    <p>
-                        I enjoy doing many different things, but the two things I am most passionate about
-                        are programming and drones, and I hope to build a career around them.
-                        What I enjoy most about programming is not just writing code, but the problem-solving
-                        that comes with it. Drone work adds a real-world aspect to that problem-solving because
-                        every environment is different, requiring preparation, adaptability, and attention to
-                        detail to ensure accurate work.
-                    </p>
-                </div>
+                <section className="academic-section">
 
-                <div className="header-image">
-                    <img src={badlandsSign} alt="The Badlands" />
-                </div>
-            </header>
+                    <img
+                        src={diplomaOne}
+                        alt="First Diploma"
+                    />
 
-            <main>
-                <section className="hobbies">
+                    <div className="academic-text">
+                        <h2>First Degree / Diploma</h2>
 
-                    <div className="hobby-card">
-                        <img src={badlandsSign} alt="The Badlands" />
-
-                        <div className="overlay">
-                            <h2>Adventuring</h2>
-                        </div>
+                        <p>
+                            I acquired my Associates in Software Development from Indian Hills Community College 
+                            in 2025. The Reason I chose Indian Hills was it's affordability and it's reputation
+                            for it's computer programming and the success into the work force. I learned multiple programming languages
+                            including Java, Python, Cobol, C#, html, css, and I also learned small amounts of frontend frameworks like react.
+                            They prioritized into two seperate paths of learning, backend, and frontend.
+                        </p>
                     </div>
 
-                    <div className="hobby-card">
-                        <img src={badlandsSign} alt="Video Games" />
+                    <img
+                        src={diplomaTwo}
+                        alt="Second Diploma"
+                    />
 
-                        <div className="overlay">
-                            <h2>Video Games</h2>
-                        </div>
-                    </div>
+                    <div className="academic-text">
+                        <h2>Second Degree / Diploma</h2>
 
-                    <div className="hobby-card">
-                        <img src={badlandsSign} alt="Drones" />
-
-                        <div className="overlay">
-                            <h2>Drones</h2>
-                        </div>
-                    </div>
-
-                    <div className="hobby-card">
-                        <img src={badlandsSign} alt="Lifting Weights" />
-
-                        <div className="overlay">
-                            <h2>Lifting Weights</h2>
-                        </div>
-                    </div>
-
-                    <div className="hobby-card wide">
-                        <img src={badlandsSign} alt="Food" />
-
-                        <div className="overlay">
-                            <h2>Food</h2>
-                        </div>
+                        <p>
+                            I acquired my Bachelors in Software Development from Bellevue University in October, 2026.
+                            The Reason I chose Bellevue University was because the schools connection to Indian Hills and
+                            the ability to do it online while I work. I learned more about work place environment in Capstone of Software Development
+                            and I learned new languages like php, and JavaFX.
+                        </p>
                     </div>
 
                 </section>
-            </main>
 
+
+
+            </main>
         </>
     );
 }

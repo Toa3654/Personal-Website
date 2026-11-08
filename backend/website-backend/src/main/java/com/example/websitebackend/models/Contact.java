@@ -4,8 +4,13 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Contact is used to save contact messages
+ * from guests or users when they need to contact me
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,8 +22,8 @@ public class Contact {
     public String id;
 
     public String name;
-    public Date date;
+    private LocalDate date = LocalDate.now();
     public String email;
-    public int phone;
+    public String phone;
     public String message;
 }

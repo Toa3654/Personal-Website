@@ -23,10 +23,10 @@ export async function addContact(contact: NewContact) {
     );
 
     if (!response.ok) {
-        const message = await response.text();
+        const errorMessage = await response.text();
 
         throw new Error(
-            message || "Unable to send contact message."
+            errorMessage || `Request failed with status ${response.status}`
         );
     }
 

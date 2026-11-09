@@ -4,6 +4,7 @@ import com.example.websitebackend.exceptions.*;
 import com.example.websitebackend.iServices.ContactRepository;
 import com.example.websitebackend.iServices.IContactServices;
 import com.example.websitebackend.models.Contact;
+import com.example.websitebackend.models.EmailDetails;
 import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,49 @@ import org.springframework.stereotype.Service;
 public class ContactService implements IContactServices {
 
     private final ContactRepository contactRepository;
+    private final EmailService emailService;
 
-    public ContactService(ContactRepository contactRepository) {
+    public ContactService(
+            ContactRepository contactRepository,
+            EmailService emailService
+    ) {
         this.contactRepository = contactRepository;
+        this.emailService = emailService;
     }
 
     @Override
     public Contact addContact(Contact contact) {
 
-        return checkContact(contactRepository.save(contact));
+        checkContact(contact);
+
+        Contact savedContact =
+                contactRepository.save(contact);
+
+        EmailDetails emailDetails =
+                new EmailDetails();
+
+        emailDetails.setRecipient(
+                "your_email@gmail.com"
+        );
+
+        emailDetails.setSubject(
+                "New Contact Form Message From "
+                        + contact.getName()
+        );
+
+        emailDetails.setMsgBody(
+                "Name: " + contact.getName()
+                        + "\n\nEmail: "
+                        + contact.getEmail()
+                        + "\n\nPhone: "
+                        + contact.getPhone()
+                        + "\n\nMessage:\n"
+                        + contact.getMessage()
+        );
+
+        emailService.sendSimpleMail(emailDetails);
+
+        return savedContact;
     }
 
     @Override
@@ -47,22 +82,22 @@ public class ContactService implements IContactServices {
     public void deleteContactById(String id) {
         contactRepository.deleteContactById(id);
     }
-    @NonNull
     private Contact checkContact(Contact contact) {
-        if (contact == null){
-            throw new RuntimeException();
+
+        if (contact == null) {
+            throw new RuntimeException("Contact cannot be null");
         }
-        if(contact.email.isEmpty()) {
+
+        if (contact.getEmail() == null || contact.getEmail().isEmpty()) {
             throw new EmailEmptyException();
         }
-        if(contact.message.isEmpty()){
+
+        if (contact.getMessage() == null || contact.getMessage().isEmpty()) {
             throw new MessageEmptyException();
         }
-        if(contact.name.isEmpty()){
+
+        if (contact.getName() == null || contact.getName().isEmpty()) {
             throw new NameEmptyException();
-        }
-        if(contact.phone.isEmpty()){
-            throw new PhoneEmptyException();
         }
 
         return contact;

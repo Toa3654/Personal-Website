@@ -8,7 +8,9 @@ function Footer() {
     async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const formData = new FormData(event.currentTarget);
+        const form = event.currentTarget;
+
+        const formData = new FormData(form);
 
         const contact = {
             name: formData.get("name") as string,
@@ -22,9 +24,17 @@ function Footer() {
 
             setMessage("Message sent.");
 
-            event.currentTarget.reset();
+            form.reset();
+
         } catch (error) {
-            setMessage("Unable to send message.");
+
+            console.error(error);
+
+            if (error instanceof Error) {
+                setMessage(error.message);
+            } else {
+                setMessage("Unable to send message.");
+            }
         }
     }
 
@@ -41,21 +51,22 @@ function Footer() {
 
                 <div className="footer-form">
 
-                    <h3>Send a Message</h3>
+                    <h3>Have a Question?</h3>           
+                   <h3>Send Me a Message</h3>
 
                     <form onSubmit={handleSubmit}>
-
+                            
                         <input
                             type="text"
                             name="name"
-                            placeholder="Name"
+                            placeholder="Name*"
                             required
                         />
 
                         <input
                             type="email"
                             name="email"
-                            placeholder="Email"
+                            placeholder="Email*"
                             required
                         />
 
@@ -63,12 +74,11 @@ function Footer() {
                             type="tel"
                             name="phone"
                             placeholder="Phone"
-                            required
                         />
 
                         <textarea
                             name="message"
-                            placeholder="Message"
+                            placeholder="Message*"
                             rows={3}
                             required
                         />

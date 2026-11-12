@@ -49,10 +49,10 @@ function Signup() {
 
     return (
         <>
-            <header>
+            <header className="signup-header">
                 <h1>Create Account</h1>
             </header>
-            <main>
+            <main className="signup-page">
                 <section className="signup-box">
 
                     <form onSubmit={handleSubmit}>

@@ -61,7 +61,7 @@ body {
 }
 
 
-main {
+main:has(.hobbies) {
     width: 90%;
     max-width: 1400px;
 

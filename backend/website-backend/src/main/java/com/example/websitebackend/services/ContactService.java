@@ -5,7 +5,6 @@ import com.example.websitebackend.iServices.ContactRepository;
 import com.example.websitebackend.iServices.IContactServices;
 import com.example.websitebackend.models.Contact;
 import com.example.websitebackend.models.EmailDetails;
-import org.jspecify.annotations.NonNull;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +21,11 @@ public class ContactService implements IContactServices {
         this.emailService = emailService;
     }
 
+    /**
+    Add Contact has a specific purpose to also send the message
+     to my email, along with saving it to a database. This allows
+     real time notificationss for me to respond to
+     */
     @Override
     public Contact addContact(Contact contact) {
 
@@ -34,7 +38,7 @@ public class ContactService implements IContactServices {
                 new EmailDetails();
 
         emailDetails.setRecipient(
-                "your_email@gmail.com"
+                "cannonrivera45@gmail.com"
         );
 
         emailDetails.setSubject(

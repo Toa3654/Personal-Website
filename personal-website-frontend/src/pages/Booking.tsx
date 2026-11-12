@@ -1,49 +1,105 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 import "../styles/Booking.css";
 
-function Booking() {
+import { addBooking } from "../services/bookingService";
+
+interface User {
+    id: string;
+    firstname: string;
+    email: string;
+    phone: string;
+}
+
+interface BookingProps {
+    user: User | null;
+}
+
+function Booking({ user }: BookingProps) {
     const [message, setMessage] = useState("");
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
     async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
 
+        if (!user || !selectedDate) {
+            return;
+        }
+
         const booking = {
-            service: formData.get("service"),
-            date: formData.get("date"),
-            time: formData.get("time"),
-            name: formData.get("name"),
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            notes: formData.get("notes"),
+            service: formData.get("service") as string,
+
+            date: selectedDate.toISOString().split("T")[0],
+
+            time: formData.get("time") as string,
+
+            name: user.firstname,
+            email: user.email,
+            phone: user.phone,
+
+            additionalinfo: formData.get("notes") as string,
         };
 
         try {
-            const response = await fetch(
-                "http://localhost:8080/personalwebsite/bookings/add",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    credentials: "include",
-                    body: JSON.stringify(booking),
-                }
+            await addBooking(booking);
+
+            setMessage(
+                "Booking information saved. Continue to payment."
             );
 
-            if (!response.ok) {
-                throw new Error("Booking failed.");
-            }
-
-            setMessage("Booking information saved. Continue to payment.");
         } catch (error) {
-            setMessage("Something went wrong while creating the booking.");
+            console.error(error);
+
+            if (error instanceof Error) {
+                setMessage(error.message);
+            } else {
+                setMessage(
+                    "Something went wrong while creating the booking."
+                );
+            }
         }
     }
 
+
+    if (!user) {
+        return (
+            <main className="booking-page">
+
+                <section className="booking-login-box">
+
+                    <h1>Booking</h1>
+
+                    <p>
+                        Please log in before booking a service.
+                    </p>
+
+                    <div className="booking-login-links">
+
+                        <Link to="/login">
+                            Login
+                        </Link>
+
+                        <Link to="/signup">
+                            Create Account
+                        </Link>
+
+                    </div>
+
+                </section>
+
+            </main>
+        );
+    }
+
+
     return (
         <main className="booking-page">
+
             <section className="booking-box">
 
                 <h1>Book a Service</h1>
@@ -51,46 +107,56 @@ function Booking() {
                 <form onSubmit={handleSubmit}>
 
                     <div>
-                        <label htmlFor="service">Service</label>
+                        <label htmlFor="service">
+                            Service
+                        </label>
 
                         <select
                             id="service"
                             name="service"
                             required
                         >
-                            <option value="">Choose a service</option>
+                            <option value="">
+                                Choose a service
+                            </option>
 
-                            <option value="hunting-recovery">
+                            <option value="HUNTING_RECOVERY">
                                 Hunting Recovery
                             </option>
 
-                            <option value="drone-learning">
+                            <option value="DRONE_LEARNING">
                                 Drone Learning
                             </option>
 
-                            <option value="real-estate-photography">
+                            <option value="REAL_ESTATE_PHOTOGRAPHY">
                                 Real Estate Photography
                             </option>
 
-                            <option value="website-building">
+                            <option value="WEBSITE_BUILDING">
                                 Website Building
                             </option>
                         </select>
                     </div>
 
-                    <div>
-                        <label htmlFor="date">Date</label>
 
-                        <input
-                            type="date"
-                            id="date"
-                            name="date"
-                            required
+                    <div>
+                        <label>
+                            Date
+                        </label>
+
+                        <DatePicker
+                            selected={selectedDate}
+                            onChange={(date) => setSelectedDate(date)}
+                            minDate={new Date()}
+                            dateFormat="MM/dd/yyyy"
                         />
                     </div>
 
+
                     <div>
-                        <label htmlFor="time">Preferred Time</label>
+                        <label htmlFor="time">
+                            Preferred Time
+                        </label>
 
                         <input
                             type="time"
@@ -100,40 +166,9 @@ function Booking() {
                         />
                     </div>
 
-                    <div>
-                        <label htmlFor="name">Name</label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="email">Email</label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="phone">Phone Number</label>
-
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            required
-                        />
-                    </div>
 
                     <div className="booking-notes">
+
                         <label htmlFor="notes">
                             Additional Information
                         </label>
@@ -144,7 +179,9 @@ function Booking() {
                             rows={5}
                             placeholder="Tell me anything important about the job..."
                         />
+
                     </div>
+
 
                     <button type="submit">
                         Continue to Payment
@@ -152,9 +189,13 @@ function Booking() {
 
                 </form>
 
-                {message && <p>{message}</p>}
+
+                {message && (
+                    <p>{message}</p>
+                )}
 
             </section>
+
         </main>
     );
 }

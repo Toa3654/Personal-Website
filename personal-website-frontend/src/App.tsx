@@ -16,6 +16,7 @@ import WebsiteBuilding from "./pages/WebsiteBuilding";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Booking from "./pages/Booking";
+import Profile from "./pages/Profile";
 
 interface User {
     id: string;
@@ -72,8 +73,8 @@ function App() {
                 <Route path="/hunting" element={<Hunting />} />
                 <Route path="/drone-learning" element={<DroneLearning />} />
                 <Route path="/website-building" element={<WebsiteBuilding />} />
-                <Route path="/booking" element={<Booking />} />
-
+                <Route path="/profile" element={<Profile user={user} />}/>
+                <Route path="/booking" element={<Booking user={user} />}/>
                 <Route path="/signup" element={<Signup />} />
 
                 <Route

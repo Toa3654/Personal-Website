@@ -41,14 +41,12 @@ public class UserService implements IUserServices {
 
     @Override
     public User updateUser(User user, String id) {
-        user = checkUser(user);
 
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         existingUser.setFirstname(user.getFirstname());
         existingUser.setLastname(user.getLastname());
         existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
         existingUser.setPhone(user.getPhone());
 
         return userRepository.save(existingUser);

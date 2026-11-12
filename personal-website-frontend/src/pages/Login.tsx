@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginUser } from "../services/authService";
+import "../styles/Login.css";
 
 function Login() {
     const [error, setError] = useState("");
@@ -21,7 +22,6 @@ function Login() {
 
             console.log("Logged in user:", user);
 
-            // You can redirect after login here
             window.location.href = "/";
         } catch (err) {
             if (err instanceof Error) {
@@ -33,13 +33,17 @@ function Login() {
     }
 
     return (
-        <main>
-            <section>
-                <h1>Login</h1>
+        <main className="login-page">
+
+            <section className="login-box">
 
                 <form onSubmit={handleSubmit}>
+                    <h1>Login</h1>
+
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">
+                            Email
+                        </label>
 
                         <input
                             type="email"
@@ -50,7 +54,9 @@ function Login() {
                     </div>
 
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">
+                            Password
+                        </label>
 
                         <input
                             type="password"
@@ -60,12 +66,18 @@ function Login() {
                         />
                     </div>
 
-                    {error && <p>{error}</p>}
+                    {error && (
+                        <p className="login-error">
+                            {error}
+                        </p>
+                    )}
 
                     <button type="submit">
                         Login
                     </button>
+
                 </form>
+
             </section>
         </main>
     );

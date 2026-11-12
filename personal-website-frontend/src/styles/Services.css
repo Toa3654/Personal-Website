@@ -13,7 +13,7 @@ body {
 
 /* PAGE */
 
-main {
+main:has(.Real-estate) {
     width: 95%;
     max-width: 1200px;
 
@@ -24,18 +24,18 @@ main {
 
 /* MAIN SERVICE SECTIONS */
 
-main > section {
+main:has(.Real-estate) > section {
     margin-bottom: 90px;
 }
 
 
 /* SECTION HEADER */
 
-main > section > header {
+main:has(.Real-estate) > section > header {
     margin-bottom: 40px;
 }
 
-main > section > header h1 {
+main:has(.Real-estate) > section > header h1 {
     font-size: 48px;
     text-align: center;
 }
@@ -46,7 +46,7 @@ main > section > header h1 {
 .Real-estate,
 .hunting,
 .Drone-Learning,
-main > section:last-of-type > div {
+main:has(.Real-estate) > section:last-of-type > div {
     background-color: white;
 
     padding: 35px;
@@ -64,7 +64,7 @@ main > section:last-of-type > div {
 .Real-estate h2,
 .hunting h2,
 .Drone-Learning h2,
-main > section:last-of-type h2 {
+main:has(.Real-estate) > section:last-of-type h2 {
     font-size: 32px;
 
     margin-bottom: 18px;
@@ -76,7 +76,7 @@ main > section:last-of-type h2 {
 .Real-estate h2::after,
 .hunting h2::after,
 .Drone-Learning h2::after,
-main > section:last-of-type h2::after {
+main:has(.Real-estate) > section:last-of-type h2::after {
     content: "";
 
     display: block;
@@ -95,7 +95,7 @@ main > section:last-of-type h2::after {
 .Real-estate p,
 .hunting p,
 .Drone-Learning p,
-main > section:last-of-type p {
+main:has(.Real-estate) > section:last-of-type p {
     font-size: 18px;
 
     line-height: 1.7;
@@ -141,7 +141,7 @@ main > section:last-of-type p {
 
 /* DRONE SERVICES GRID */
 
-main > section:first-of-type {
+main:has(.Real-estate) > section:first-of-type {
     display: grid;
 
     grid-template-columns: repeat(3, 1fr);
@@ -152,27 +152,27 @@ main > section:first-of-type {
 
 /* HEADER SPANS FULL WIDTH */
 
-main > section:first-of-type > header {
+main:has(.Real-estate) > section:first-of-type > header {
     grid-column: 1 / -1;
 }
 
 
 /* REMOVE EXTRA CARD MARGINS INSIDE GRID */
 
-main > section:first-of-type .Real-estate,
-main > section:first-of-type .hunting,
-main > section:first-of-type .Drone-Learning {
+main:has(.Real-estate) > section:first-of-type .Real-estate,
+main:has(.Real-estate) > section:first-of-type .hunting,
+main:has(.Real-estate) > section:first-of-type .Drone-Learning {
     margin-bottom: 0;
 }
 
 
 /* PROGRAMMING SERVICES */
 
-main > section:last-of-type {
+main:has(.Real-estate) > section:last-of-type {
     width: 100%;
 }
 
-main > section:last-of-type > div {
+main:has(.Real-estate) > section:last-of-type > div {
     max-width: 950px;
 
     margin-left: auto;
@@ -184,7 +184,7 @@ main > section:last-of-type > div {
 
 @media (max-width: 950px) {
 
-    main > section:first-of-type {
+    main:has(.Real-estate) > section:first-of-type {
         grid-template-columns: 1fr 1fr;
     }
 
@@ -192,7 +192,7 @@ main > section:last-of-type > div {
         grid-column: 1 / -1;
     }
 
-    main > section > header h1 {
+    main:has(.Real-estate) > section > header h1 {
         font-size: 40px;
     }
 }
@@ -202,16 +202,16 @@ main > section:last-of-type > div {
 
 @media (max-width: 700px) {
 
-    main {
+    main:has(.Real-estate) {
         width: 92%;
         padding: 35px 0;
     }
 
-    main > section {
+    main:has(.Real-estate) > section {
         margin-bottom: 60px;
     }
 
-    main > section:first-of-type {
+    main:has(.Real-estate) > section:first-of-type {
         grid-template-columns: 1fr;
     }
 
@@ -219,28 +219,28 @@ main > section:last-of-type > div {
         grid-column: auto;
     }
 
-    main > section > header h1 {
+    main:has(.Real-estate) > section > header h1 {
         font-size: 34px;
     }
 
     .Real-estate,
     .hunting,
     .Drone-Learning,
-    main > section:last-of-type > div {
+    main:has(.Real-estate) > section:last-of-type > div {
         padding: 25px;
     }
 
     .Real-estate h2,
     .hunting h2,
     .Drone-Learning h2,
-    main > section:last-of-type h2 {
+    main:has(.Real-estate) > section:last-of-type h2 {
         font-size: 27px;
     }
 
     .Real-estate p,
     .hunting p,
     .Drone-Learning p,
-    main > section:last-of-type p {
+    main:has(.Real-estate) > section:last-of-type p {
         font-size: 16px;
     }
 }

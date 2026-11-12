@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 interface User {
     id: string;
-    firstname : string;
+    firstname: string;
     email: string;
 }
 
@@ -48,31 +48,72 @@ function Navbar({ user, setUser }: NavbarProps) {
             </div>
 
             <div className="navbar-links">
-                <Link to="/about">About</Link>
-                <Link to="/academics">Academics</Link>
-                <Link to="/certificates">Certificates</Link>
+
+                <Link to="/about">
+                    About
+                </Link>
+
 
                 <div className="dropdown">
-                    <Link to="/services" className="dropdown-title">
+                    <span className="dropdown-title">
+                        Credentials
+                    </span>
+
+                    <div className="dropdown-menu">
+                        <Link to="/academics">
+                            Academics
+                        </Link>
+
+                        <Link to="/certificates">
+                            Certificates
+                        </Link>
+                    </div>
+                </div>
+
+
+                <div className="dropdown">
+                    <Link
+                        to="/services"
+                        className="dropdown-title"
+                    >
                         Services
                     </Link>
 
                     <div className="dropdown-menu">
-                        <Link to="/services">All Services</Link>
-                        <Link to="/realestate">Real Estate Photography</Link>
-                        <Link to="/hunting">Hunting Recovery</Link>
-                        <Link to="/dronelearning">Drone Learning</Link>
-                        <Link to="/websitebuilding">Website Building</Link>
+                        <Link to="/services">
+                            All Services
+                        </Link>
+
+                        <Link to="/realestate">
+                            Real Estate Photography
+                        </Link>
+
+                        <Link to="/hunting">
+                            Hunting Recovery
+                        </Link>
+
+                        <Link to="/dronelearning">
+                            Drone Learning
+                        </Link>
+
+                        <Link to="/websitebuilding">
+                            Website Building
+                        </Link>
                     </div>
                 </div>
 
-                <Link to="/booking">Booking</Link>
+
+                <Link to="/booking">
+                    Booking
+                </Link>
+
 
                 {user ? (
                     <>
-                        <span className="navbar-user">
-                            Welcome, {user.firstname}
-                        </span>
+
+                        <Link to="/profile">
+                            Profile
+                        </Link>
 
                         <button
                             className="logout-button"
@@ -83,10 +124,19 @@ function Navbar({ user, setUser }: NavbarProps) {
                         </button>
                     </>
                 ) : (
-                    <>
-                        <Link to="/signup">Sign up</Link>
-                        <Link to="/login">Login</Link>
-                    </>
+                    <div className="auth-links">
+
+                        <Link to="/signup">
+                            Sign Up
+                        </Link>
+
+                        <span>/</span>
+
+                        <Link to="/login">
+                            Login
+                        </Link>
+
+                    </div>
                 )}
             </div>
 

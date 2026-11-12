@@ -5,18 +5,77 @@
     justify-content: center;
     align-items: center;
 
-    padding: 50px 20px;
-
     background-color: #eef1f2;
 }
 
-.booking-box {
+.booking-login-box {
     width: 100%;
-    max-width: 900px;
+    max-width: 450px;
+
+    padding: 40px;
 
     background-color: white;
 
+    border-radius: 10px;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+}
+
+.booking-login-box h1 {
+    font-size: 36px;
+
+    margin-bottom: 20px;
+}
+
+.booking-login-box p {
+    font-size: 18px;
+
+    margin-bottom: 25px;
+
+    color: #444;
+}
+
+.booking-login-links {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.booking-login-links a {
+    width: 220px;
+
+    padding: 12px;
+
+    background-color: #ef5b3d;
+    color: white;
+
+    border-radius: 6px;
+
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.booking-login-links a:hover {
+    background-color: #d94c31;
+}
+
+
+/* LOGGED IN BOOKING FORM */
+
+.booking-box {
+    width: 100%;
+    max-width: 600px;
+
     padding: 40px;
+
+    background-color: white;
 
     border-radius: 10px;
 
@@ -26,27 +85,27 @@
 .booking-box h1 {
     text-align: center;
 
-    margin-bottom: 35px;
-
     font-size: 36px;
+
+    margin-bottom: 30px;
 }
 
 .booking-box form {
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
-    gap: 25px 35px;
-}
-
-.booking-box form div {
     display: flex;
     flex-direction: column;
 
-    gap: 8px;
+    gap: 20px;
+}
+
+.booking-box form > div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
 }
 
 .booking-box label {
+    font-size: 15px;
     font-weight: 600;
 }
 
@@ -60,21 +119,33 @@
     font-size: 16px;
 
     border: 1px solid #ccc;
-
     border-radius: 6px;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.booking-notes {
-    grid-column: 1 / -1;
+.booking-box input:focus,
+.booking-box select:focus,
+.booking-box textarea:focus {
+    outline: none;
+
+    border-color: #ef5b3d;
 }
 
-.booking-box button {
-    grid-column: 1 / -1;
+.booking-box textarea {
+    resize: vertical;
+    min-height: 100px;
+}
 
-    padding: 14px;
+
+/* ONLY STYLE THE MAIN FORM BUTTON */
+
+.booking-box form > button {
+    width: 100%;
+
+    padding: 13px;
 
     border: none;
-
     border-radius: 6px;
 
     background-color: #ef5b3d;
@@ -86,17 +157,27 @@
     cursor: pointer;
 }
 
-.booking-box button:hover {
+.booking-box form > button:hover {
     background-color: #d94c31;
 }
 
-@media (max-width: 700px) {
-    .booking-box form {
-        grid-template-columns: 1fr;
-    }
 
-    .booking-notes,
-    .booking-box button {
-        grid-column: 1;
+.booking-box > p {
+    margin-top: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    color: #444;
+}
+
+.react-datepicker-popper {
+    z-index: 10;
+}
+
+@media (max-width: 650px) {
+    .booking-box {
+        padding: 30px 20px;
     }
 }

@@ -7,6 +7,17 @@ import "../styles/Booking.css";
 
 import { addBooking } from "../services/bookingService";
 
+/**
+ * Booking.tsx has code I researched and found. It uses
+ * react-datepicker, a npm dependency that has it's own css and class.
+ * It looks nice and allows restriction on past dates so the user can 
+ * only pick from dates after today. The rest of the code is a basic form
+ * that onSubmit saves a booking to the backend database. Later there will
+ * be a cart system that requires purchase before booking is saved.
+ * 
+ * If the user isn't logged in and they come to the booking page
+ * They are prompted to sign up or log in before booking
+ */
 interface User {
     id: string;
     firstname: string;

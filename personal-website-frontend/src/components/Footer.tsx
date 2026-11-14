@@ -2,6 +2,12 @@ import { useState } from "react";
 import { addContact } from "../services/contactService";
 import "../styles/Footer.css";
 
+/**
+ * The Footer Establishes Contact information you can use externally
+ * Along with a custom contact form sent directly to my email Where 
+ * You can send a message from the website. It also has copyright
+ * @returns 
+ */
 function Footer() {
     const [message, setMessage] = useState("");
 
@@ -47,7 +53,6 @@ function Footer() {
                     <h2>Cannon Rivera</h2>
                     <p>Software Developer & Drone Pilot</p>
                 </div>
-
 
                 <div className="footer-form">
 
@@ -97,7 +102,6 @@ function Footer() {
 
                 </div>
 
-
                 <div className="footer-contact">
                     <h3>Contact</h3>
 
@@ -119,7 +123,6 @@ function Footer() {
                 </div>
 
             </div>
-
 
             <div className="footer-bottom">
                 <p>© 2026 Cannon Rivera. All rights reserved.</p>

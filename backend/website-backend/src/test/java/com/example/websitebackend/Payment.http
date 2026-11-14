@@ -1,0 +1,7 @@
+POST http://localhost:8080/personalwebsite/payments/create
+Content-Type: application/json
+
+{
+  "sourceId": "cnon:card-nonce-ok",
+  "amount": "5000"
+}

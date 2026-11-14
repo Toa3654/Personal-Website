@@ -1,6 +1,12 @@
 import "../styles/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 
+/**
+ * Navbar.tsx Has all the necessary links to traverse the
+ * website from each page. It also transitions to a profile and logout
+ * when a user is logged in. Otherwise it shows a sign up/login. 
+ * This allows the navbar to be smaller and no overwhelming.
+ */
 interface User {
     id: string;
     firstname: string;

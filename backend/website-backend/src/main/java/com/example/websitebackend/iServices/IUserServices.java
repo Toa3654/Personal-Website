@@ -2,6 +2,8 @@ package com.example.websitebackend.iServices;
 
 import com.example.websitebackend.models.User;
 
+import java.util.List;
+
 public interface IUserServices{
 
     User addUser(User user);
@@ -12,4 +14,5 @@ public interface IUserServices{
     User getUserById(String id);
 
     void deleteUserById(String id);
+
 }

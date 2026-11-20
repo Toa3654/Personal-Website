@@ -1,5 +1,6 @@
 package com.example.websitebackend.models;
 
+import com.example.websitebackend.models.enums.Role;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,4 +23,5 @@ public class User {
     public String firstname;
     public String lastname;
     public String phone;
+    private Role role;
 }

@@ -1,0 +1,164 @@
+.admin-page {
+    min-height: calc(100vh - 90px);
+    background-color: #eef1f2;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 50px 20px;
+}
+
+.admin-dashboard {
+    width: 100%;
+    max-width: 1000px;
+
+    background-color: white;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12);
+
+    overflow: visible;
+}
+
+
+/* TOP MENU */
+
+.admin-menu {
+    display: flex;
+
+    border-bottom: 1px solid #ccc;
+}
+
+.admin-menu > button,
+.admin-booking-button {
+    padding: 18px 40px;
+
+    background-color: white;
+
+    border: none;
+    border-right: 1px solid #ccc;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.admin-menu > button:hover,
+.admin-booking-button:hover {
+    background-color: #f4f4f4;
+}
+
+
+/* BOOKING DROPDOWN */
+
+.admin-booking-dropdown {
+    position: relative;
+}
+
+.admin-booking-menu {
+    display: none;
+
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    min-width: 230px;
+
+    background-color: white;
+
+    border: 1px solid #ccc;
+
+    z-index: 20;
+}
+
+.admin-booking-dropdown:hover
+.admin-booking-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-booking-menu button {
+    width: 100%;
+
+    padding: 12px 15px;
+
+    background-color: white;
+
+    border: none;
+    border-bottom: 1px solid #ddd;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.admin-booking-menu button:hover {
+    background-color: #f4f4f4;
+}
+
+
+/* CHANGING CONTENT BOX */
+
+.admin-content {
+    min-height: 500px;
+
+    padding: 40px;
+}
+
+
+/* TOTALS */
+
+.admin-totals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.admin-totals h2 {
+    width: 100%;
+}
+
+.admin-totals > div {
+    flex: 1;
+
+    min-width: 180px;
+
+    padding: 25px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    text-align: center;
+}
+
+.admin-totals p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/* USERS / CONTACTS / BOOKINGS */
+
+.admin-item {
+    padding: 20px 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-item h3 {
+    margin-bottom: 10px;
+}
+
+.admin-item p {
+    margin: 5px 0;
+}
+
+.admin-error {
+    color: red;
+    margin-bottom: 20px;
+}

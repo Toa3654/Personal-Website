@@ -4,13 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 /**
  * Navbar.tsx Has all the necessary links to traverse the
  * website from each page. It also transitions to a profile and logout
- * when a user is logged in. Otherwise it shows a sign up/login. 
- * This allows the navbar to be smaller and no overwhelming.
+ * when a user is logged in. Otherwise it shows a sign up/login.
+ * This allows the navbar to be smaller and not overwhelming.
  */
 interface User {
     id: string;
     firstname: string;
     email: string;
+    role: "USER" | "ADMIN";
 }
 
 interface NavbarProps {
@@ -59,7 +60,6 @@ function Navbar({ user, setUser }: NavbarProps) {
                     About
                 </Link>
 
-
                 <div className="dropdown">
                     <span className="dropdown-title">
                         Credentials
@@ -75,7 +75,6 @@ function Navbar({ user, setUser }: NavbarProps) {
                         </Link>
                     </div>
                 </div>
-
 
                 <div className="dropdown">
                     <Link
@@ -108,18 +107,21 @@ function Navbar({ user, setUser }: NavbarProps) {
                     </div>
                 </div>
 
-
                 <Link to="/booking">
                     Booking
                 </Link>
 
-
                 {user ? (
                     <>
-
                         <Link to="/profile">
                             Profile
                         </Link>
+
+                        {user.role === "ADMIN" && (
+                            <Link to="/admin">
+                                Admin
+                            </Link>
+                        )}
 
                         <button
                             className="logout-button"

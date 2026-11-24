@@ -4,6 +4,7 @@ export interface NewUser {
     email: string;
     phone: string;
     password: string;
+
 }
 
 export async function addUser(user: NewUser) {

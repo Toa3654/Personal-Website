@@ -2,6 +2,7 @@ package com.example.websitebackend.services;
 
 import com.example.websitebackend.exceptions.*;
 import com.example.websitebackend.models.User;
+import com.example.websitebackend.models.enums.Role;
 import com.example.websitebackend.iServices.IUserServices;
 import com.example.websitebackend.iServices.UserRepository;
 import org.jspecify.annotations.NonNull;
@@ -15,7 +16,7 @@ public class UserService implements IUserServices {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
+
     public User authenticate(String email, String password) {
         User user = userRepository.findByEmail(email);
 
@@ -32,9 +33,14 @@ public class UserService implements IUserServices {
 
     @Override
     public User addUser(User user) {
-        try{
-            return userRepository.save(checkUser(user));
-        }catch(Exception e){
+        try {
+            User checkedUser = checkUser(user);
+
+            checkedUser.setRole(Role.USER);
+
+            return userRepository.save(checkedUser);
+
+        } catch (Exception e) {
             throw new RuntimeException();
         }
     }
@@ -44,6 +50,7 @@ public class UserService implements IUserServices {
 
         User existingUser = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
         existingUser.setFirstname(user.getFirstname());
         existingUser.setLastname(user.getLastname());
         existingUser.setEmail(user.getEmail());
@@ -56,42 +63,44 @@ public class UserService implements IUserServices {
     public User getUserByEmail(String email) {
         return checkUser(userRepository.getUserByEmail(email));
     }
+
     @Override
     public User getUserById(String id) {
         return checkUser(userRepository.getUserById(id));
     }
 
-
     @Override
     public void deleteUserById(String id) {
         userRepository.deleteUserById(id);
     }
-    /**
-     * validates user input data keeps code dry
-     * as it is used multiple times
-     * @param user
-     * @return
-     */
+
     @NonNull
     private User checkUser(User user) {
-        if (user == null){
+
+        if (user == null) {
             throw new RuntimeException();
         }
-        if(user.email.isEmpty()) {
+
+        if (user.email.isEmpty()) {
             throw new EmailEmptyException();
         }
-        if(user.firstname.isEmpty()){
+
+        if (user.firstname.isEmpty()) {
             throw new NameEmptyException();
         }
-        if(user.lastname.isEmpty()){
+
+        if (user.lastname.isEmpty()) {
             throw new NameEmptyException();
         }
-        if(user.phone.isEmpty()){
+
+        if (user.phone.isEmpty()) {
             throw new NameEmptyException();
         }
-        if(user.password.isEmpty()){
+
+        if (user.password.isEmpty()) {
             throw new PasswordEmptyException();
         }
+
         return user;
     }
 }

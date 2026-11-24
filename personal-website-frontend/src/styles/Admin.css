@@ -1,0 +1,320 @@
+.admin-page {
+    min-height: calc(100vh - 90px);
+    background-color: #eef1f2;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding: 50px 20px;
+}
+
+.admin-dashboard {
+    width: 100%;
+    max-width: 1000px;
+
+    background-color: white;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.12);
+
+    overflow: visible;
+}
+
+
+/* TOP MENU */
+
+.admin-menu {
+    display: flex;
+
+    border-bottom: 1px solid #ccc;
+}
+
+.admin-menu > button,
+.admin-booking-button {
+    padding: 18px 40px;
+
+    background-color: white;
+
+    border: none;
+    border-right: 1px solid #ccc;
+
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.admin-menu > button:hover,
+.admin-booking-button:hover {
+    background-color: #f4f4f4;
+}
+
+
+/* BOOKING DROPDOWN */
+
+.admin-booking-dropdown {
+    position: relative;
+}
+
+.admin-booking-menu {
+    display: none;
+
+    position: absolute;
+
+    top: 100%;
+    left: 0;
+
+    min-width: 230px;
+
+    background-color: white;
+
+    border: 1px solid #ccc;
+
+    z-index: 20;
+}
+
+.admin-booking-dropdown:hover
+.admin-booking-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-booking-menu button {
+    width: 100%;
+
+    padding: 12px 15px;
+
+    background-color: white;
+
+    border: none;
+    border-bottom: 1px solid #ddd;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.admin-booking-menu button:hover {
+    background-color: #f4f4f4;
+}
+
+
+/* CHANGING CONTENT BOX */
+
+.admin-content {
+    min-height: 500px;
+
+    padding: 40px;
+}
+
+
+/* TOTALS */
+
+.admin-totals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.admin-totals h2 {
+    width: 100%;
+}
+
+.admin-totals > div {
+    flex: 1;
+
+    min-width: 180px;
+
+    padding: 25px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 6px;
+
+    text-align: center;
+}
+
+.admin-totals p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/* USERS / CONTACTS / BOOKINGS */
+
+.admin-item {
+    padding: 20px 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-item h3 {
+    margin-bottom: 10px;
+}
+
+.admin-item p {
+    margin: 5px 0;
+}
+
+.admin-error {
+    color: red;
+    margin-bottom: 20px;
+}
+
+
+/* CALENDAR */
+
+.admin-calendar {
+    width: 100%;
+}
+
+
+/* CALENDAR HEADER */
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+    margin: 0;
+
+    font-size: 28px;
+}
+
+.calendar-header button {
+    padding: 10px 18px;
+
+    background-color: #ef5b3d;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.calendar-header button:hover {
+    background-color: #d94c31;
+}
+
+
+/* WEEKDAY NAMES */
+
+.calendar-weekdays {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    text-align: center;
+
+    font-weight: bold;
+
+    background-color: #f4f4f4;
+
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+}
+
+.calendar-weekdays div {
+    padding: 12px 5px;
+
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+
+/* CALENDAR GRID */
+
+.calendar-grid {
+    display: grid;
+
+    grid-template-columns: repeat(7, 1fr);
+
+    border-left: 1px solid #ccc;
+}
+
+
+/* INDIVIDUAL CALENDAR DAY */
+
+.calendar-day {
+    min-height: 110px;
+
+    padding: 10px;
+
+    background-color: white;
+
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+.calendar-day.blank {
+    background-color: #f8f8f8;
+}
+
+
+/* DAY NUMBER */
+
+.calendar-date {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* NUMBER OF BOOKINGS */
+
+.calendar-booking-count {
+    min-width: 32px;
+    height: 32px;
+
+    padding: 0 9px;
+
+    background-color: #ef5b3d;
+    color: white;
+
+    border: none;
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.calendar-booking-count:hover {
+    background-color: #d94c31;
+}
+.admin-delete-button {
+    margin-top: 12px;
+
+    padding: 8px 16px;
+
+    background-color: #ef5b3d;
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.admin-delete-button:hover {
+    background-color: #d94c31;
+}

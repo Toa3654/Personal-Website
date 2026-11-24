@@ -70,6 +70,7 @@ public class UserController {
 
         session.setAttribute("userId", user.getId());
         session.setAttribute("email", user.getEmail());
+        session.setAttribute("role", user.getRole());
 
         return ResponseEntity.ok(user);
     }

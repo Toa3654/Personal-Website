@@ -1,11 +1,12 @@
-
 ### Add User
 POST http://localhost:8080/personalwebsite/users/add
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@gmail.com",
+  "firstname": "cannon",
+  "lastname": "rivera",
+  "email": "admin@gmail.com",
+  "phone": "5551234567",
   "password": "Password123"
 }
 

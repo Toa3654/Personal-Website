@@ -18,6 +18,7 @@ import Login from "./pages/Login";
 import Booking from "./pages/Booking";
 import Profile from "./pages/Profile";
 import Payment from "./pages/Payment";
+import Admin from "./pages/Admin";
 
 
 interface User {
@@ -25,6 +26,7 @@ interface User {
     firstName: string;
     lastName: string;
     email: string;
+    role: "USER" | "ADMIN";
 }
 
 function App() {
@@ -73,12 +75,13 @@ function App() {
 
                 <Route path="/realestate" element={<Realestate />} />
                 <Route path="/hunting" element={<Hunting />} />
-                <Route path="/drone-learning" element={<DroneLearning />} />
-                <Route path="/website-building" element={<WebsiteBuilding />} />
-                <Route path="/payment" element={<Payment />} />
+                <Route path="/dronelearning" element={<DroneLearning />} />
+                <Route path="/websitebuilding" element={<WebsiteBuilding />} />
+                <Route path="/payment" element={<Payment user={user}/>} />
                 <Route path="/profile" element={<Profile user={user} />}/>
                 <Route path="/booking" element={<Booking user={user} />}/>
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/admin" element={<Admin user={user}/>} />
 
                 <Route
                     path="/login"

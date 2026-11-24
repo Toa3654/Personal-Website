@@ -10,6 +10,7 @@ import com.example.websitebackend.iServices.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -31,7 +32,16 @@ public class AdminService implements IAdminServices {
 
     @Override
     public List<Contact> getAllContacts() {
-        return contactRepository.findAll();
+
+        return contactRepository
+                .findAll()
+                .stream()
+                .sorted(
+                        Comparator.comparing(
+                                Contact::getDate
+                        )
+                )
+                .toList();
     }
 
     @Override
@@ -52,13 +62,16 @@ public class AdminService implements IAdminServices {
                 .stream()
                 .filter(booking ->
                         booking.getDate() != null &&
-                                booking.getDate().getMonthValue() == month
+                                booking.getDate()
+                                        .getMonthValue() == month
                 )
                 .toList();
     }
 
     @Override
-    public List<Booking> getBookingsByDay(LocalDate date) {
+    public List<Booking> getBookingsByDay(
+            LocalDate date
+    ) {
 
         return bookingRepository
                 .findAll()
@@ -71,7 +84,9 @@ public class AdminService implements IAdminServices {
     }
 
     @Override
-    public List<Booking> getBookingsByService(String service) {
+    public List<Booking> getBookingsByService(
+            String service
+    ) {
 
         return bookingRepository
                 .findAll()
@@ -98,5 +113,20 @@ public class AdminService implements IAdminServices {
     @Override
     public long getTotalContacts() {
         return contactRepository.count();
+    }
+
+    @Override
+    public void deleteContact(String id) {
+        contactRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteBooking(String id) {
+        bookingRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteUser(String id) {
+        userRepository.deleteById(id);
     }
 }

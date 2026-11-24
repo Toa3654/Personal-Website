@@ -6,13 +6,18 @@ import {
     getAllContacts,
     getAllBookings,
     getBookingsByService,
+    getBookingsByMonth,
+    getBookingsByDay,
     getTotalUsers,
     getTotalBookings,
     getTotalContacts,
+    deleteContact,
+    deleteBooking,
+    deleteUser,
     type AdminUser,
     type AdminContact,
     type AdminBooking,
-} from "../services/adminService";
+} from "../services/adminservice";
 
 import "../styles/Admin.css";
 
@@ -33,7 +38,8 @@ type AdminView =
     | "totals"
     | "users"
     | "contacts"
-    | "bookings";
+    | "bookings"
+    | "calendar";
 
 function Admin({ user }: AdminProps) {
 
@@ -49,6 +55,9 @@ function Admin({ user }: AdminProps) {
     const [bookings, setBookings] =
         useState<AdminBooking[]>([]);
 
+    const [calendarBookings, setCalendarBookings] =
+        useState<AdminBooking[]>([]);
+
     const [totalUsers, setTotalUsers] =
         useState(0);
 
@@ -61,17 +70,19 @@ function Admin({ user }: AdminProps) {
     const [selectedService, setSelectedService] =
         useState("ALL");
 
+    const [selectedDate, setSelectedDate] =
+        useState("");
+
+    const [currentDate, setCurrentDate] =
+        useState(new Date());
+
     const [error, setError] =
         useState("");
 
     const [loading, setLoading] =
         useState(false);
 
-    /*
-        These values need to match your Java Services enum.
-        When you add another service later,
-        just add it here.
-    */
+
     const services = [
         {
             name: "All Bookings",
@@ -95,9 +106,7 @@ function Admin({ user }: AdminProps) {
         },
     ];
 
-    /*
-        Load totals when the admin page first opens.
-    */
+
     useEffect(() => {
 
         if (!user || user.role !== "ADMIN") {
@@ -107,6 +116,7 @@ function Admin({ user }: AdminProps) {
         loadTotals();
 
     }, [user]);
+
 
     async function loadTotals() {
 
@@ -143,6 +153,7 @@ function Admin({ user }: AdminProps) {
         }
     }
 
+
     async function loadUsers() {
 
         setLoading(true);
@@ -167,6 +178,7 @@ function Admin({ user }: AdminProps) {
             setLoading(false);
         }
     }
+
 
     async function loadContacts() {
 
@@ -193,14 +205,17 @@ function Admin({ user }: AdminProps) {
         }
     }
 
+
     async function loadBookings(
         service: string
     ) {
 
         setLoading(true);
         setError("");
+
         setActiveView("bookings");
         setSelectedService(service);
+        setSelectedDate("");
 
         try {
 
@@ -234,6 +249,365 @@ function Admin({ user }: AdminProps) {
         }
     }
 
+
+    async function loadCalendar(
+        date: Date = currentDate
+    ) {
+
+        setLoading(true);
+        setError("");
+        setActiveView("calendar");
+
+        try {
+
+            const month =
+                date.getMonth() + 1;
+
+            const data =
+                await getBookingsByMonth(month);
+
+            setCalendarBookings(data);
+
+        } catch (err) {
+
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Unable to load calendar.");
+            }
+
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    async function loadBookingsForDay(
+        date: string
+    ) {
+
+        setLoading(true);
+        setError("");
+
+        setSelectedDate(date);
+        setActiveView("bookings");
+
+        try {
+
+            const data =
+                await getBookingsByDay(date);
+
+            setBookings(data);
+
+        } catch (err) {
+
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError(
+                    "Unable to load bookings for this day."
+                );
+            }
+
+        } finally {
+            setLoading(false);
+        }
+    }
+
+
+    async function handleDeleteContact(
+        id: string
+    ) {
+
+        const confirmed =
+            window.confirm(
+                "Are you sure you want to delete this contact?"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+
+            await deleteContact(id);
+
+            setContacts(
+                contacts.filter(
+                    contact =>
+                        contact.id !== id
+                )
+            );
+
+            setTotalContacts(
+                current =>
+                    Math.max(current - 1, 0)
+            );
+
+        } catch (err) {
+
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError(
+                    "Unable to delete contact."
+                );
+            }
+        }
+    }
+
+
+    async function handleDeleteBooking(
+        id: string
+    ) {
+
+        const confirmed =
+            window.confirm(
+                "Are you sure you want to delete this booking?"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+
+            await deleteBooking(id);
+
+            setBookings(
+                bookings.filter(
+                    booking =>
+                        booking.id !== id
+                )
+            );
+
+            setCalendarBookings(
+                calendarBookings.filter(
+                    booking =>
+                        booking.id !== id
+                )
+            );
+
+            setTotalBookings(
+                current =>
+                    Math.max(current - 1, 0)
+            );
+
+        } catch (err) {
+
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError(
+                    "Unable to delete booking."
+                );
+            }
+        }
+    }
+
+
+    async function handleDeleteUser(
+        id: string
+    ) {
+
+        const confirmed =
+            window.confirm(
+                "Are you sure you want to delete this user?"
+            );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+
+            await deleteUser(id);
+
+            setUsers(
+                users.filter(
+                    adminUser =>
+                        adminUser.id !== id
+                )
+            );
+
+            setTotalUsers(
+                current =>
+                    Math.max(current - 1, 0)
+            );
+
+        } catch (err) {
+
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError(
+                    "Unable to delete user."
+                );
+            }
+        }
+    }
+
+
+    async function previousMonth() {
+
+        const newDate =
+            new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth() - 1,
+                1
+            );
+
+        setCurrentDate(newDate);
+
+        await loadCalendar(newDate);
+    }
+
+
+    async function nextMonth() {
+
+        const newDate =
+            new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth() + 1,
+                1
+            );
+
+        setCurrentDate(newDate);
+
+        await loadCalendar(newDate);
+    }
+
+
+    function getBookingCount(
+        day: number
+    ) {
+
+        return calendarBookings.filter(
+            booking => {
+
+                const bookingDate =
+                    new Date(
+                        `${booking.date}T00:00:00`
+                    );
+
+                return (
+                    bookingDate.getDate() === day &&
+                    bookingDate.getMonth() ===
+                        currentDate.getMonth() &&
+                    bookingDate.getFullYear() ===
+                        currentDate.getFullYear()
+                );
+            }
+        ).length;
+    }
+
+
+    function formatDate(
+        year: number,
+        month: number,
+        day: number
+    ) {
+
+        const monthString =
+            String(month + 1).padStart(2, "0");
+
+        const dayString =
+            String(day).padStart(2, "0");
+
+        return `${year}-${monthString}-${dayString}`;
+    }
+
+
+    function renderCalendar() {
+
+        const year =
+            currentDate.getFullYear();
+
+        const month =
+            currentDate.getMonth();
+
+        const firstDay =
+            new Date(
+                year,
+                month,
+                1
+            ).getDay();
+
+        const daysInMonth =
+            new Date(
+                year,
+                month + 1,
+                0
+            ).getDate();
+
+        const calendarDays = [];
+
+        for (
+            let i = 0;
+            i < firstDay;
+            i++
+        ) {
+
+            calendarDays.push(
+                <div
+                    key={`blank-${i}`}
+                    className="calendar-day blank"
+                />
+            );
+        }
+
+
+        for (
+            let day = 1;
+            day <= daysInMonth;
+            day++
+        ) {
+
+            const count =
+                getBookingCount(day);
+
+            const dateString =
+                formatDate(
+                    year,
+                    month,
+                    day
+                );
+
+            calendarDays.push(
+
+                <div
+                    key={day}
+                    className="calendar-day"
+                >
+
+                    <span className="calendar-date">
+                        {day}
+                    </span>
+
+                    {count > 0 && (
+
+                        <button
+                            type="button"
+                            className="calendar-booking-count"
+                            onClick={() =>
+                                loadBookingsForDay(
+                                    dateString
+                                )
+                            }
+                        >
+                            {count}
+                        </button>
+
+                    )}
+
+                </div>
+            );
+        }
+
+        return calendarDays;
+    }
+
+
     if (!user) {
         return <Navigate to="/login" />;
     }
@@ -242,10 +616,13 @@ function Admin({ user }: AdminProps) {
         return <Navigate to="/" />;
     }
 
+
     return (
+
         <main className="admin-page">
 
             <section className="admin-dashboard">
+
 
                 {/* TOP MENU */}
 
@@ -258,12 +635,14 @@ function Admin({ user }: AdminProps) {
                         Totals
                     </button>
 
+
                     <button
                         type="button"
                         onClick={loadUsers}
                     >
                         User
                     </button>
+
 
                     <button
                         type="button"
@@ -286,7 +665,8 @@ function Admin({ user }: AdminProps) {
 
                         <div className="admin-booking-menu">
 
-                            {services.map((service) => (
+                            {services.map(
+                                service => (
 
                                 <button
                                     type="button"
@@ -306,12 +686,25 @@ function Admin({ user }: AdminProps) {
 
                     </div>
 
+
+                    {/* CALENDAR */}
+
+                    <button
+                        type="button"
+                        onClick={() =>
+                            loadCalendar()
+                        }
+                    >
+                        Calendar
+                    </button>
+
                 </div>
 
 
-                {/* MAIN CHANGING BOX */}
+                {/* MAIN CONTENT */}
 
                 <div className="admin-content">
+
 
                     {error && (
                         <p className="admin-error">
@@ -319,8 +712,11 @@ function Admin({ user }: AdminProps) {
                         </p>
                     )}
 
+
                     {loading && (
-                        <p>Loading...</p>
+                        <p>
+                            Loading...
+                        </p>
                     )}
 
 
@@ -331,21 +727,47 @@ function Admin({ user }: AdminProps) {
 
                         <div className="admin-totals">
 
-                            <h2>Totals</h2>
+                            <h2>
+                                Totals
+                            </h2>
+
 
                             <div>
-                                <h3>Users</h3>
-                                <p>{totalUsers}</p>
+
+                                <h3>
+                                    Users
+                                </h3>
+
+                                <p>
+                                    {totalUsers}
+                                </p>
+
                             </div>
 
-                            <div>
-                                <h3>Bookings</h3>
-                                <p>{totalBookings}</p>
-                            </div>
 
                             <div>
-                                <h3>Contacts</h3>
-                                <p>{totalContacts}</p>
+
+                                <h3>
+                                    Bookings
+                                </h3>
+
+                                <p>
+                                    {totalBookings}
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    Contacts
+                                </h3>
+
+                                <p>
+                                    {totalContacts}
+                                </p>
+
                             </div>
 
                         </div>
@@ -359,15 +781,21 @@ function Admin({ user }: AdminProps) {
 
                         <div className="admin-users">
 
-                            <h2>Users</h2>
+                            <h2>
+                                Users
+                            </h2>
+
 
                             {users.length === 0 ? (
 
-                                <p>No users found.</p>
+                                <p>
+                                    No users found.
+                                </p>
 
                             ) : (
 
-                                users.map((adminUser) => (
+                                users.map(
+                                    adminUser => (
 
                                     <div
                                         className="admin-item"
@@ -394,6 +822,23 @@ function Admin({ user }: AdminProps) {
                                             {adminUser.role}
                                         </p>
 
+
+                                        {adminUser.id !== user.id && (
+
+                                            <button
+                                                type="button"
+                                                className="admin-delete-button"
+                                                onClick={() =>
+                                                    handleDeleteUser(
+                                                        adminUser.id
+                                                    )
+                                                }
+                                            >
+                                                Delete
+                                            </button>
+
+                                        )}
+
                                     </div>
 
                                 ))
@@ -410,7 +855,10 @@ function Admin({ user }: AdminProps) {
 
                         <div className="admin-contacts">
 
-                            <h2>Contacts</h2>
+                            <h2>
+                                Contacts
+                            </h2>
+
 
                             {contacts.length === 0 ? (
 
@@ -420,7 +868,8 @@ function Admin({ user }: AdminProps) {
 
                             ) : (
 
-                                contacts.map((contact) => (
+                                contacts.map(
+                                    contact => (
 
                                     <div
                                         className="admin-item"
@@ -430,6 +879,15 @@ function Admin({ user }: AdminProps) {
                                         <h3>
                                             {contact.name}
                                         </h3>
+
+
+                                        {"date" in contact && (
+                                            <p>
+                                                Date:{" "}
+                                                {String(contact.date)}
+                                            </p>
+                                        )}
+
 
                                         <p>
                                             Email:{" "}
@@ -449,10 +907,92 @@ function Admin({ user }: AdminProps) {
                                             {contact.message}
                                         </p>
 
+
+                                        <button
+                                            type="button"
+                                            className="admin-delete-button"
+                                            onClick={() =>
+                                                handleDeleteContact(
+                                                    contact.id
+                                                )
+                                            }
+                                        >
+                                            Delete
+                                        </button>
+
                                     </div>
 
                                 ))
                             )}
+
+                        </div>
+                    )}
+
+
+                    {/* CALENDAR */}
+
+                    {!loading &&
+                        activeView === "calendar" && (
+
+                        <div className="admin-calendar">
+
+
+                            <div className="calendar-header">
+
+                                <button
+                                    type="button"
+                                    onClick={
+                                        previousMonth
+                                    }
+                                >
+                                    Previous
+                                </button>
+
+
+                                <h2>
+
+                                    {currentDate.toLocaleString(
+                                        "default",
+                                        {
+                                            month: "long",
+                                            year: "numeric",
+                                        }
+                                    )}
+
+                                </h2>
+
+
+                                <button
+                                    type="button"
+                                    onClick={
+                                        nextMonth
+                                    }
+                                >
+                                    Next
+                                </button>
+
+                            </div>
+
+
+                            <div className="calendar-weekdays">
+
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+
+                            </div>
+
+
+                            <div className="calendar-grid">
+
+                                {renderCalendar()}
+
+                            </div>
+
 
                         </div>
                     )}
@@ -466,12 +1006,17 @@ function Admin({ user }: AdminProps) {
                         <div className="admin-bookings">
 
                             <h2>
-                                {services.find(
-                                    service =>
-                                        service.value ===
-                                        selectedService
-                                )?.name}
+
+                                {selectedDate
+                                    ? `Bookings for ${selectedDate}`
+                                    : services.find(
+                                        service =>
+                                            service.value ===
+                                            selectedService
+                                    )?.name}
+
                             </h2>
+
 
                             {bookings.length === 0 ? (
 
@@ -481,7 +1026,8 @@ function Admin({ user }: AdminProps) {
 
                             ) : (
 
-                                bookings.map((booking) => (
+                                bookings.map(
+                                    booking => (
 
                                     <div
                                         className="admin-item"
@@ -519,21 +1065,31 @@ function Admin({ user }: AdminProps) {
 
                                         <p>
                                             Additional Information:{" "}
-                                            {
-                                                booking.additionalinfo
-                                            }
+                                            {booking.additionalinfo}
                                         </p>
+
 
                                         {booking.paymentStatus && (
 
                                             <p>
                                                 Payment Status:{" "}
-                                                {
-                                                    booking.paymentStatus
-                                                }
+                                                {booking.paymentStatus}
                                             </p>
 
                                         )}
+
+
+                                        <button
+                                            type="button"
+                                            className="admin-delete-button"
+                                            onClick={() =>
+                                                handleDeleteBooking(
+                                                    booking.id
+                                                )
+                                            }
+                                        >
+                                            Delete
+                                        </button>
 
                                     </div>
 

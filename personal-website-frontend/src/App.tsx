@@ -75,8 +75,8 @@ function App() {
 
                 <Route path="/realestate" element={<Realestate />} />
                 <Route path="/hunting" element={<Hunting />} />
-                <Route path="/drone-learning" element={<DroneLearning />} />
-                <Route path="/website-building" element={<WebsiteBuilding />} />
+                <Route path="/dronelearning" element={<DroneLearning />} />
+                <Route path="/websitebuilding" element={<WebsiteBuilding />} />
                 <Route path="/payment" element={<Payment user={user}/>} />
                 <Route path="/profile" element={<Profile user={user} />}/>
                 <Route path="/booking" element={<Booking user={user} />}/>

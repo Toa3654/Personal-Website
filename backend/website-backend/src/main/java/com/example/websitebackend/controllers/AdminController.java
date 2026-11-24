@@ -181,4 +181,62 @@ public class AdminController {
                 adminService.getTotalContacts()
         );
     }
+    @DeleteMapping("/contacts/{id}")
+    public ResponseEntity<?> deleteContact(
+            @PathVariable String id,
+            HttpSession session
+    ) {
+
+        if (!isAdmin(session)) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Admin access required.");
+        }
+
+        adminService.deleteContact(id);
+
+        return ResponseEntity.ok(
+                "Contact deleted."
+        );
+    }
+
+
+    @DeleteMapping("/bookings/{id}")
+    public ResponseEntity<?> deleteBooking(
+            @PathVariable String id,
+            HttpSession session
+    ) {
+
+        if (!isAdmin(session)) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Admin access required.");
+        }
+
+        adminService.deleteBooking(id);
+
+        return ResponseEntity.ok(
+                "Booking deleted."
+        );
+    }
+
+
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity<?> deleteUser(
+            @PathVariable String id,
+            HttpSession session
+    ) {
+
+        if (!isAdmin(session)) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Admin access required.");
+        }
+
+        adminService.deleteUser(id);
+
+        return ResponseEntity.ok(
+                "User deleted."
+        );
+    }
 }

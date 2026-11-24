@@ -13,6 +13,7 @@ export interface AdminContact {
     email: string;
     phone: string;
     message: string;
+    date: string;
 }
 
 export interface AdminBooking {
@@ -191,4 +192,62 @@ export async function getTotalContacts(): Promise<number> {
     }
 
     return response.json();
+}
+export async function deleteContact(
+    id: string
+) {
+
+    const response = await fetch(
+        `http://localhost:8080/personalwebsite/admin/contacts/${id}`,
+        {
+            method: "DELETE",
+            credentials: "include",
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "Unable to delete contact."
+        );
+    }
+}
+
+
+export async function deleteBooking(
+    id: string
+) {
+
+    const response = await fetch(
+        `http://localhost:8080/personalwebsite/admin/bookings/${id}`,
+        {
+            method: "DELETE",
+            credentials: "include",
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "Unable to delete booking."
+        );
+    }
+}
+
+
+export async function deleteUser(
+    id: string
+) {
+
+    const response = await fetch(
+        `http://localhost:8080/personalwebsite/admin/users/${id}`,
+        {
+            method: "DELETE",
+            credentials: "include",
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(
+            "Unable to delete user."
+        );
+    }
 }

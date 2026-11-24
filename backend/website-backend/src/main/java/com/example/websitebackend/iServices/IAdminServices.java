@@ -26,4 +26,10 @@ public interface IAdminServices {
     long getTotalBookings();
 
     long getTotalContacts();
+
+    void deleteContact(String id);
+
+    void deleteBooking(String id);
+
+    void deleteUser(String id);
 }

@@ -100,10 +100,6 @@ function Navbar({ user, setUser }: NavbarProps) {
                         <Link to="/dronelearning">
                             Drone Learning
                         </Link>
-
-                        <Link to="/websitebuilding">
-                            Website Building
-                        </Link>
                     </div>
                 </div>
 

@@ -14,16 +14,16 @@ function DroneLearning() {
                     </h1>
 
                     <p>
-                        One-on-one drone instruction for beginners who want
-                        to learn how to fly safely, understand their equipment,
-                        and become more confident operating a drone.
+                        One-on-one drone consultation for people looking
+                        to start drone operations as a hobby, for work, or for agriculture.
+                        Advice on Part 107, safety, equipment and practicality.
                     </p>
 
                     <Link
                         to="/booking"
                         className="drone-learning-button"
                     >
-                        Book a Lesson
+                        Book a Session
                     </Link>
 
                 </div>
@@ -41,14 +41,14 @@ function DroneLearning() {
 
                     <p>
                         Drone technology can be overwhelming when you are
-                        getting started. My goal is to make the learning
-                        process simple and practical.
+                        getting started and videos might not be for you. Learning from someone
+                        in front of you is a very common learning improvement.
                     </p>
 
                     <p>
-                        Lessons can focus on basic flight controls, safety,
-                        equipment setup, camera settings, or other areas you
-                        want help understanding.
+                        Lessons can be whatever you feel you want to learn.
+                        Part 107 studying, basic drone skills, laws, or even just
+                        wanting to know more about the technology.
                     </p>
 
                 </div>
@@ -145,7 +145,7 @@ function DroneLearning() {
 
                         <p>
                             Bring specific questions or problems you are
-                            having with your drone and we can focus the lesson
+                            having with drones and we can focus the lesson
                             on what you need help with most.
                         </p>
 
@@ -171,7 +171,7 @@ function DroneLearning() {
                         </li>
 
                         <li>
-                            People who are nervous about flying
+                            People who have thought about getting a drone
                         </li>
 
                         <li>
@@ -183,7 +183,7 @@ function DroneLearning() {
                         </li>
 
                         <li>
-                            Future Part 107 pilots
+                            People who want there Part 107
                         </li>
 
                         <li>
@@ -238,14 +238,6 @@ function DroneLearning() {
                 >
                     Book Drone Learning
                 </Link>
-
-                <a
-                    href="#contact"
-                    className="drone-learning-contact"
-                >
-                    Contact Me
-                </a>
-
             </section>
 
         </main>
